@@ -15,7 +15,7 @@ def index():
     cursor.execute("SELECT * FROM respuestas;")
     respuestas = cursor.fetchall()
     conexion.close()
-    return render_template('indexconfig.html', respuestas=respuestas)
+    return render_template('index.html', respuestas=respuestas)
 
 # Ruta para agregar una nueva respuesta
 @app.route('/agregar', methods=['GET', 'POST'])
@@ -30,7 +30,7 @@ def agregar_respuesta():
         conexion.commit()
         conexion.close()
         
-        return redirect(url_for('indexconfig'))
+        return redirect(url_for('index'))
     
     return render_template('agregar_respuesta.html')
 
