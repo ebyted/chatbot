@@ -13,7 +13,7 @@ def index():
     return render_template('index.html')
 
 # Ruta para manejar las respuestas del chat
-@app.route('/chat', methods=['POST'])
+@app.route('/chat', methods=['GET', 'POST'])
 def chat():
     user_message = request.form['message']
     
