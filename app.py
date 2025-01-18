@@ -1,5 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request
 import sqlite3
+import nltk
+from nltk.tokenize import word_tokenize
+
+# Asegúrate de tener descargado el modelo punkt para la tokenización
+nltk.download('punkt')
 
 app = Flask(__name__)
 
@@ -30,15 +35,21 @@ def menu():
 def chat():
     if request.method == 'POST':
         user_input = request.form['user_input']
+        # Tokenizar la entrada del usuario
+        tokens = word_tokenize(user_input.lower())
+        
+        # Buscar una respuesta para cada token en la base de datos
         conn = sqlite3.connect(DATABASE)
         cursor = conn.cursor()
-        cursor.execute("SELECT respuesta FROM respuestas WHERE palabra_clave = ?", (user_input,))
-        result = cursor.fetchone()
+        response = "Lo siento, no entiendo esa palabra clave."
+        for token in tokens:
+            cursor.execute("SELECT respuesta FROM respuestas WHERE palabra_clave = ?", (token,))
+            result = cursor.fetchone()
+            if result:
+                response = result[0]
+                break  # Detener la búsqueda si se encuentra una respuesta
         conn.close()
-        if result:
-            response = result[0]
-        else:
-            response = "Lo siento, no entiendo esa palabra clave."
+        
         return render_template('chat.html', user_input=user_input, response=response)
     return render_template('chat.html')
 
