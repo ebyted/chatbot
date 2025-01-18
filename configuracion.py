@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, send_file, url_for
 import sqlite3
 
 app = Flask(__name__)
@@ -9,7 +9,7 @@ def conectar_db():
 
 # Ruta para la página principal que muestra las respuestas
 @app.route('/')
-def index():
+def indexconfig():
     conexion = conectar_db()
     cursor = conexion.cursor()
     cursor.execute("SELECT * FROM respuestas;")
@@ -47,7 +47,7 @@ def editar_respuesta(id):
         cursor.execute("UPDATE respuestas SET respuesta = ? WHERE id = ?;", (nueva_respuesta, id))
         conexion.commit()
         conexion.close()
-        return redirect(url_for('index'))
+        return redirect(url_for('indexconfig'))
     
     conexion.close()
     return render_template('editar_respuesta.html', respuesta=respuesta)
@@ -60,7 +60,9 @@ def eliminar_respuesta(id):
     cursor.execute("DELETE FROM respuestas WHERE id = ?;", (id,))
     conexion.commit()
     conexion.close()
-    return redirect(url_for('index'))
+    return redirect(url_for('indexconfig'))
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

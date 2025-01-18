@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_file
 import re
 import nltk
 import sqlite3
@@ -79,6 +79,11 @@ def chat():
     tokens = preprocesar_texto(mensaje_usuario)
     respuesta = buscar_respuesta(tokens)
     return jsonify({"respuesta": respuesta})
+
+@app.route('/configuracion')
+def configuracion():
+    # Opción 1: Descargar el archivo
+    return send_file('configuracion.py', as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
