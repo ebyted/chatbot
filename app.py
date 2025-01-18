@@ -6,8 +6,13 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import string
 
+import os
+
+nltk.data.path.append(os.getenv('NLTK_DATA', './nltk_data'))
+
+
 # Configuración inicial de NLTK
-nltk.download('punkt')
+nltk.download('punkt', download_dir=os.getenv('NLTK_DATA', './nltk_data'))
 nltk.download('stopwords')
 
 # Inicializa Flask
