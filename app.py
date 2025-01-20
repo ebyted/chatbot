@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import sqlite3
 import nltk
 import os
+
 from nltk.tokenize import word_tokenize
 
 nltk.data.path.append("./nltk_data")  # Establecer un directorio local para los datos
@@ -79,4 +80,7 @@ def configuracion():
     return render_template('configuracion.html', respuestas=respuestas)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
+
+    
