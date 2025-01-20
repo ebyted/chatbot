@@ -1,0 +1,16 @@
+quiero aplicación de python con lo siguiente:
+
+que se conecte a una base de datos: chatbot.bd
+y cree la primera vez una tabla: respuestas
+
+si la tabla existe , que se conecte a ella
+
+que tenga un menu principal donde haya 2 botones:
+
+chat: sera para enviar a una pagina donde se chateará con un agente inteligente
+
+configuracion: mostrara otra pagina donde se den de alta , baja o cambios de una tabla: respuestas, esta tabla tendra 2 campos: palabra_clave y respuesta, en el campo respuesta es para que el chatbot responda lo correspondiente a la palabra clave
+
+dame todo el codigo funcionando no quiero errores, la base de datos y tabla espeficidass ya existen en el directorio solo accesa a ello
+
+agrega por  favor bootstrap con colores suaves 
