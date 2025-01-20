@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request
 import sqlite3
 import nltk
+import os
 from nltk.tokenize import word_tokenize
 
 # Asegúrate de tener descargado el modelo punkt para la tokenización
 nltk.download('punkt')
+nltk.data.path.append(os.path.join(os.getcwd(), "nltk_data"))
 
 app = Flask(__name__)
 
