@@ -4,9 +4,8 @@ import nltk
 import os
 from nltk.tokenize import word_tokenize
 
-# Asegúrate de tener descargado el modelo punkt para la tokenización
-nltk.download('punkt')
-nltk.data.path.append(os.path.join(os.getcwd(), "nltk_data"))
+nltk.data.path.append("./nltk_data")  # Establecer un directorio local para los datos
+nltk.download("punkt", download_dir="./nltk_data")
 
 app = Flask(__name__)
 
